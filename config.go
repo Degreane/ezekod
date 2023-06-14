@@ -1,7 +1,9 @@
 package main
 
-import "log"
+import (
+	"github.com/degreane/ezekod.com/model"
+)
 
 var (
-	Log *log.Logger
+	DB model.DB
 )
