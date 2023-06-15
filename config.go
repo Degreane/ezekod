@@ -5,6 +5,7 @@ import (
 	"os"
 	"path"
 
+	"github.com/degreane/ezekod.com/middleware"
 	"github.com/degreane/ezekod.com/middleware/ezelogger"
 	"github.com/degreane/ezekod.com/model"
 	"github.com/degreane/ezekod.com/server"
@@ -36,6 +37,11 @@ func init() {
 		ezelogger.Ezelogger.Fatalf("%+v", err)
 	}
 	// DB: -> End of Init Database Connection
+
+	// MiddleWares: Initialize MiddleWares
+	middleware.Init()
+	ezelogger.Ezelogger.Printf("MiddleWares Registered : % +v", middleware.MiddleWares)
+	// MiddleWares: End of Initialization
 
 	// Fibers: -> Initialize Application
 	server.App = server.Init()
