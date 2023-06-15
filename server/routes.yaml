@@ -1,0 +1,14 @@
+# Routes as a list of route
+# Route as a dictionary of 
+#    path <type string>
+#    method <type string> one of [ALL,GET,POST,PUT,DELETE]
+#    middlewares <type []string> any number of  [loggedIn,]
+routes:
+  - path: /
+    method: GET
+    middlewares:
+      - getDefault
+  - path: /
+    method: POST
+    middlewares:
+      - postDefault
