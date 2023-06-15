@@ -7,9 +7,12 @@ var (
 )
 
 func getDefault(c *fiber.Ctx) error {
+
 	return c.JSON(fiber.Map{
 		"path":   c.Path(),
 		"method": c.Method(),
+		"name":   "getDefault",
+		"params": c.AllParams(),
 	})
 }
 func postDefault(c *fiber.Ctx) error {

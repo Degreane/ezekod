@@ -7,6 +7,7 @@ import (
 	"os"
 	"path"
 
+	"github.com/degreane/ezekod.com/middleware"
 	"github.com/gofiber/fiber/v2"
 	"gopkg.in/yaml.v3"
 )
@@ -23,13 +24,11 @@ type Routes struct {
 func (server *Server) applyRoutes(pth []APath) {
 	for pIdx := 0; pIdx < len(pth); pIdx++ {
 		thePath := pth[pIdx]
-		server.App.Add(thePath.Method, thePath.Path, func(c *fiber.Ctx) error {
-			fmt.Printf(" Adding Route \n % +v\n", thePath)
-			return c.JSON(&fiber.Map{
-				"Route":  thePath.Path,
-				"Method": thePath.Method,
-			})
-		})
+		var elements []func(c *fiber.Ctx) error
+		for _, element := range thePath.MiddleWares {
+			elements = append(elements, middleware.MiddleWares[element])
+		}
+		server.App.Add(thePath.Method, thePath.Path, elements...)
 
 	}
 }

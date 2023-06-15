@@ -14,6 +14,7 @@ var (
 
 type DB struct {
 	Connection *mongo.Client
+	DataBase   *mongo.Database
 }
 
 // DB returns a Database Client Connection Handler
@@ -30,4 +31,8 @@ func (c *DB) Connect() error {
 
 func (c DB) CloseDB() error {
 	return c.Connection.Disconnect(context.Background())
+}
+func (c *DB) SetDatabase(db string) {
+	database := c.Connection.Database(db)
+	c.DataBase = database
 }

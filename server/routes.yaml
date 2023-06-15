@@ -8,6 +8,10 @@ routes:
     method: GET
     middlewares:
       - getDefault
+  - path: "/id/k:id"
+    method: GET
+    middlewares:
+      - getDefault
   - path: /
     method: POST
     middlewares:

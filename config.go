@@ -33,6 +33,7 @@ func init() {
 
 	// DB: -> Init Database MongoDB connection
 	err = DB.Connect()
+	DB.SetDatabase("ezekod")
 	if err != nil {
 		ezelogger.Ezelogger.Fatalf("%+v", err)
 	}
