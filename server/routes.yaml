@@ -8,10 +8,12 @@ routes:
     method: GET
     middlewares:
       - getDefault
-  - path: "/id/k:id"
-    method: GET
+  - path: "/login"
+    method: POST
     middlewares:
-      - getDefault
+      - log
+      - login
+      - postDefault
   - path: /
     method: POST
     middlewares:

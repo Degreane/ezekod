@@ -1,6 +1,10 @@
 package middleware
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/degreane/ezekod.com/middleware/ezelogger"
+	"github.com/degreane/ezekod.com/middleware/security"
+	"github.com/gofiber/fiber/v2"
+)
 
 var (
 	MiddleWares map[string]func(c *fiber.Ctx) error = make(map[string]func(c *fiber.Ctx) error)
@@ -25,4 +29,6 @@ func postDefault(c *fiber.Ctx) error {
 func Init() {
 	MiddleWares["getDefault"] = getDefault
 	MiddleWares["postDefault"] = postDefault
+	MiddleWares["login"] = security.Login
+	MiddleWares["log"] = ezelogger.LogRequest
 }

@@ -38,7 +38,8 @@ func init() {
 	if err != nil {
 		ezelogger.Ezelogger.Fatalf("Connect : %+v", err)
 	}
-	users.TestInsertUser()
+	users.Init()
+	// users.TestInsertUser()
 	// DB: -> End of Init Database Connection
 
 	// MiddleWares: Initialize MiddleWares

@@ -1,7 +1,13 @@
 GET http://localhost:3001/
 
 ###
-GET http://localhost:3001/id/ksomeContentID
+POST http://localhost:3001/login
+Accept: "application/json"
+
+{
+    "username":"fbanna",
+    "password":"shta2telik"
+}
 
 ###
 POST http://localhost:3001/ 

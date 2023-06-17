@@ -20,7 +20,9 @@ if [[ ${resp} -eq 0 ]]; then
             else 
                 ## start docker server
                 ${DOCKER} start ezekod
-            fi 
+            fi
+        else
+            printf '%s\n' "'jq' not found please install" 
         fi
     else
         ## Here we should Initiate docker 

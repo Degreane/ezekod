@@ -22,16 +22,30 @@ type User struct {
 }
 
 var (
-	Users mongo.Collection
+	Users *mongo.Collection
 )
 
+func Init() {
+	Users = model.DB.DataBase.Collection("users")
+}
 func (u *User) Insert() {
-	res, err := model.DB.DataBase.Collection("users").InsertOne(context.TODO(), u)
+	res, err := Users.InsertOne(context.TODO(), u)
 	if err != nil {
 		ezelogger.Ezelogger.Fatalf("%+v", err)
 	}
 	ezelogger.Ezelogger.Printf("%+v", res)
 
+}
+func Find(filter interface{}) (User, bool) {
+	var user User
+	ezelogger.Ezelogger.Printf("Model->Users->Find : filter\n% +v", filter)
+	theUser := Users.FindOne(context.TODO(), filter)
+	err := theUser.Decode(&user)
+	if err != nil {
+		ezelogger.Ezelogger.Printf("Model->Users->Find : Err\n% +v", err)
+		return user, false
+	}
+	return user, true
 }
 
 func TestInsertUser() {
