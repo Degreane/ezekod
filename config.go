@@ -8,13 +8,14 @@ import (
 	"github.com/degreane/ezekod.com/middleware"
 	"github.com/degreane/ezekod.com/middleware/ezelogger"
 	"github.com/degreane/ezekod.com/model"
+	"github.com/degreane/ezekod.com/model/users"
 	"github.com/degreane/ezekod.com/server"
 	"github.com/gofiber/fiber/v2"
 )
 
 var (
 	// Database
-	DB model.DB
+	DB model.DBase
 
 	// Server Fiber Application
 	Server fiber.App
@@ -32,11 +33,12 @@ func init() {
 	// Log: -> End Of Initialization
 
 	// DB: -> Init Database MongoDB connection
-	err = DB.Connect()
-	DB.SetDatabase("ezekod")
+	err = model.DB.Connect()
+	// model.DB.SetDatabase("ezekod")
 	if err != nil {
-		ezelogger.Ezelogger.Fatalf("%+v", err)
+		ezelogger.Ezelogger.Fatalf("Connect : %+v", err)
 	}
+	users.TestInsertUser()
 	// DB: -> End of Init Database Connection
 
 	// MiddleWares: Initialize MiddleWares
