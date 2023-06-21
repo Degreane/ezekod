@@ -18,3 +18,9 @@ routes:
     method: POST
     middlewares:
       - postDefault
+  - path: "/logout"
+    method: POST
+    middlewares:
+      - log
+      - logout
+      - postDefault

@@ -17,6 +17,7 @@ func getDefault(c *fiber.Ctx) error {
 		"method": c.Method(),
 		"name":   "getDefault",
 		"params": c.AllParams(),
+		"query":  c.Query("auth"),
 	})
 }
 func postDefault(c *fiber.Ctx) error {
@@ -30,5 +31,6 @@ func Init() {
 	MiddleWares["getDefault"] = getDefault
 	MiddleWares["postDefault"] = postDefault
 	MiddleWares["login"] = security.Login
+	MiddleWares["logout"] = security.Logout
 	MiddleWares["log"] = ezelogger.LogRequest
 }

@@ -1,0 +1,4 @@
+security:
+  type: HMAC256
+  secret: A Secret Key
+  encKey: someEncrytion

@@ -15,6 +15,7 @@ func Login(c *fiber.Ctx) error {
 	lhe := "MiddleWare->Security->Login : <Error> "
 	lhs := "MiddleWare->Security->Login : <Success> "
 	var userBody interface{}
+	readConfig()
 	err := bson.UnmarshalExtJSON(c.Body(), true, &userBody)
 	if err != nil {
 		ezelogger.Ezelogger.Printf("%s % +v", lhe, err)
@@ -25,6 +26,12 @@ func Login(c *fiber.Ctx) error {
 	user, ok := users.Find(userBody)
 	if ok {
 		ezelogger.Ezelogger.Printf("%s % +v", lhs, user)
+		newJWTToken := newJWT(JWTClaims{
+			ID:    user.ID.String(),
+			Group: user.Group,
+		})
+		c.Locals("auth", newJWTToken)
+		c.Set("X-AuthToken", newJWTToken)
 	} else {
 		ezelogger.Ezelogger.Printf("%s : No User Found ", lhe)
 	}
